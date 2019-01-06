@@ -183,6 +183,10 @@ function openSSHConnection(serverName, isFastConnection, forwardingArgs = null) 
     else { // If the terminal instance was found
         terminal = terminal.terminal;
         terminalIsNew = false;
+        if (vscode.workspace.getConfiguration('sshextension').openProjectCatalog) {
+            if (isFastConnection)
+                terminal.sendText("cd " + fastOpenConnectionProjectPath);
+        }
     }
     if (!hasErrors) {
         terminal.show();
@@ -283,6 +287,7 @@ function createForwarding(serverName){
 // This method try to find server with project that contains file
 function getProjectByFilePath(filePath) {
     var projectPath = null;
+    var fileFolder = "";
     // Get path to edited file with fixed drive letter case
     var openedFileName = upath.normalize(filePath);
     openedFileName = openedFileName.replace(/\w:/g, function (g) { return g.toLowerCase() })
@@ -295,14 +300,25 @@ function getProjectByFilePath(filePath) {
             // Get project path with fixed drive letter case
             var serverProjectPath = upath.normalize(item);
             serverProjectPath = serverProjectPath.replace(/\w:/g, function (g) { return g.toLowerCase() });
-            thisServerMapped = isPathInside(openedFileName, serverProjectPath);
-            if (thisServerMapped) {
+            var isMapped = isPathInside(openedFileName, serverProjectPath);
+            if (isMapped) {
+                thisServerMapped = isMapped;
                 projectPath = element.configuration.project[item];
+                fileFolder = "";
+                if (openedFileName.length > serverProjectPath.length) {
+                    fileFolder = openedFileName.substr(serverProjectPath.length, openedFileName.length - serverProjectPath.length);
+                    fileFolder = fileFolder.substr(0, fileFolder.lastIndexOf('/'));
+                }
             }
         }, this);
         return thisServerMapped;
     }, openedFileName);
-    return { "server" : server, "projectPath" : projectPath };
+
+    var openPath = projectPath;
+    if (server && server.configuration.openFilePath) {
+        openPath = projectPath + fileFolder;
+    }
+    return { "server": server, "projectPath": openPath };
 }
 
 function manageFastOpenConnectionButtonState() {
