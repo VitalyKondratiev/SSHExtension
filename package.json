@@ -125,7 +125,12 @@
                 "type": "string",
                 "description": "Path on server for `cd` command after session start (not required)",
                 "required": false
-              },
+							},
+							"openFilePath": {
+								"type": "boolean",
+								"default": false,
+								"description": "Open File Direcotry"
+							},
               "customCommands": {
                 "type": [
                   "array"
