@@ -2,7 +2,7 @@
   "name": "sshextension",
   "displayName": "SSHExtension",
   "description": "Extension for SSH connections using the ftp-simple settings",
-  "version": "0.5.1",
+  "version": "0.5.4",
   "publisher": "kondratiev",
   "license": "MIT",
   "engines": {
