@@ -89,7 +89,8 @@ For example:
             "path": "/",
             "customCommands": [
               "pwd"
-            ]
+            ],
+            "portKnockingPort" : 82517
         },
         ...
     ]
