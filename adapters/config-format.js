@@ -13,6 +13,7 @@ var format = function (element){
     "project": element.project,	// Used for fast button (can be undefined)
     "path": element.path, // Used for `cd` after start session (can be undefined)
     "customCommands": element.customCommands, // Used for specify commands which will execute on session start
+    "portKnockingPort": element.portKnockingPort, // Provide a port number to knock prior to SSH connection attempt
   };
   return config;
 }

@@ -70,6 +70,7 @@ Server object parameters:
 - **project**  _(object)_ - specify local workspace path and server root path for fast terminal open.
 - **path** _(string)_ - used for change directory after server connection.
 - **customCommands** _(array of strings)_ - specifies custom commands which will execute on session start
+- **portKnockingPort** _(number)_ - Port to knock
 
 For example:
 ```json
@@ -92,6 +93,19 @@ For example:
         },
         ...
     ]
+}
+```
+
+#### sshextension.portKnockingPort
+
+  * Type: `Number`
+  * Defaut: ``
+
+Specifies custom commands which will execute on session start.  
+For example:
+```json
+{
+  "sshextension.portKnockingPort": 82517
 }
 ```
 

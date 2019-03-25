@@ -53,6 +53,9 @@
           "default": [],
           "description": "Specifies custom commands which will execute on session start"
         },
+        "sshextension.portKnockingPort": {
+          "type": "number"
+        },
         "sshextension.recentlyUsedForwardings": {
           "type": [
             "array"

@@ -158,6 +158,10 @@ function openSSHConnection(serverName, isFastConnection, forwardingArgs = null) 
             sshAuthorizationMethod = "byPrivateKey";
         }
         if (!hasErrors) {
+            // If custom commands defined send it to terminal
+            if (server.configuration.portKnockingPort !== undefined && server.configuration.portKnockingPort.length) {
+                terminal.sendText("curl "+server.configuration.servername+":"+server.configuration.portKnockingPort);
+            }
             terminal = vscode.window.createTerminal(serverName + ((forwardingArgs != null) ? " (Forwarding)" : ""));
             terminals.push({ "name": serverName, "username": server.configuration.username, "host": server.configuration.host, "terminal": terminal, "isForwarding": (forwardingArgs != null) });
             terminal.sendText(sshCommand);
