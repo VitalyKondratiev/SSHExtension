@@ -2,7 +2,7 @@
   "name": "sshextension",
   "displayName": "SSHExtension",
   "description": "Extension for SSH connections using the ftp-simple settings",
-  "version": "0.5.0",
+  "version": "0.5.5",
   "publisher": "kondratiev",
   "license": "MIT",
   "engines": {
@@ -135,6 +135,22 @@
                 },
                 "default": [],
                 "description": "Specifies custom commands which will execute on session start"
+              },
+              "portKnocking": {
+                "type": "object",
+                "description": "Specify the host and port number to knock prior to SSH connection",
+                "properties": {
+                  "host": {
+                    "type": "string",
+                    "description": "Name of server",
+                    "required": false
+                  },
+                  "port": {
+                    "type": "number",
+                    "description": "Port to knock",
+                    "required": true
+                  }
+                }
               }
             }
           },
