@@ -161,7 +161,7 @@ function openSSHConnection(serverName, isFastConnection, forwardingArgs = null) 
             terminal = vscode.window.createTerminal(serverName + ((forwardingArgs != null) ? " (Forwarding)" : ""));
             // If custom commands defined send it to terminal
             terminals.push({ "name": serverName, "username": server.configuration.username, "host": server.configuration.host, "terminal": terminal, "isForwarding": (forwardingArgs != null) });
-            if (server.configuration.portKnocking.port !== undefined && server.configuration.portKnocking.port > 0) {
+            if (server.configuration.portKnocking !== undefined && server.configuration.portKnocking.port !== undefined && server.configuration.portKnocking.port > 0) {
                 var knockingHost = server.configuration.portKnocking.host !== undefined ? server.configuration.portKnocking.host : server.configuration.host;
                 terminal.sendText("curl "+knockingHost+":"+server.configuration.portKnocking.port);
             }

@@ -150,6 +150,9 @@
                     "description": "Port to knock",
                     "required": true
                   }
+                },
+                "default": {
+                  "port" : 0
                 }
               }
             }
